@@ -418,4 +418,25 @@ body.dark-mode .modal-card h3 {
     .card:hover {
         transform: translateY(-4px);
         box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+
     }
+.completed {
+    background: #16a34a;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 10px;
+}
+
+.pending {
+    background: #dc2626;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 10px;
+}
+
+.progress {
+    background: #fde68a;
+    color: #92400e;
+    padding: 4px 10px;
+    border-radius: 10px;
+}

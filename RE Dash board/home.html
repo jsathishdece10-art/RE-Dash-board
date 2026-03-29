@@ -6,8 +6,11 @@
     <title>Dashboard Home</title>
     <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body data-page="home">
+
     <div class="dashboard">
+
         <aside class="sidebar">
             <div class="brand">Tracking Dashboard</div>
             <nav class="menu">
@@ -23,14 +26,13 @@
         </aside>
 
         <main class="main">
+
             <header class="topbar">
                 <div>
                     <h1>Dashboard Overview</h1>
                     <p class="sub">Automatic summary from CSV</p>
                 </div>
-                <div class="top-actions">
-                    <button id="themeToggle" class="theme-btn">🌙 Dark</button>
-                </div>
+                <button id="themeToggle" class="theme-btn">🌙 Dark</button>
             </header>
 
             <section class="cards-grid">
@@ -52,10 +54,8 @@
                 </div>
             </section>
 
-            <section class="panel table-panel">
-                <div class="panel-header">
-                    <h3>Latest Units</h3>
-                </div>
+            <section class="panel">
+                <h3>Latest Units</h3>
                 <table>
                     <thead>
                         <tr>
@@ -70,36 +70,26 @@
                     <tbody id="homeTableBody"></tbody>
                 </table>
             </section>
+
+            <!-- CHART ROW -->
+            <section style="display:flex;gap:20px;flex-wrap:wrap;">
+
+                <div class="panel" style="flex:1;">
+                    <h3>Stage Summary</h3>
+                    <canvas id="barChart"></canvas>
+                </div>
+
+                <div class="panel" style="flex:1;">
+                    <h3>Stage Distribution</h3>
+                    <canvas id="pieChart"></canvas>
+                </div>
+
+            </section>
+
         </main>
-    </div>
-    <div class="panel">
-        <h3>Stage Summary</h3>
-        <canvas id="barChart" style="max-width:500px;height:250px;"></canvas>
+
     </div>
 
-    <div class="panel">
-        <h3>Stage Distribution</h3>
-        <canvas id="pieChart" style="max-width:400px;height:250px;"></canvas>
-    </div>
-
-    <div class="panel">
-        <h3>USN Details</h3>
-        <div id="usnDetails"></div>
-    </div>
-    <div class="panel">
-        <h3>Stage Summary</h3>
-        <canvas id="barChart" style="max-width:500px;height:250px;"></canvas>
-    </div>
-
-    <div class="panel">
-        <h3>Stage Distribution</h3>
-        <canvas id="pieChart" style="max-width:400px;height:250px;"></canvas>
-    </div>
-
-    <div class="panel">
-        <h3>USN Details</h3>
-        <div id="usnDetails"></div>
-    </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/script.js"></script>
 
