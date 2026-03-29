@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37111.16 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RE Dash board", "RE Dash board\RE Dash board.csproj", "{28CD4B88-4128-494E-A314-EC5EB63CD84A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{28CD4B88-4128-494E-A314-EC5EB63CD84A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28CD4B88-4128-494E-A314-EC5EB63CD84A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28CD4B88-4128-494E-A314-EC5EB63CD84A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28CD4B88-4128-494E-A314-EC5EB63CD84A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0715E37E-DAE0-42DD-8961-D83BFA24DEB6}
+	EndGlobalSection
+EndGlobal

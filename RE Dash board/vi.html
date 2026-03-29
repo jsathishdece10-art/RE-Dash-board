@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Warehouse</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="stage" data-stage="vi">
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="brand">Tracking Dashboard</div>
+            <nav class="menu">
+                <a class="menu-item" href="home.html">Dashboard</a>
+                <a class="menu-item" href="tracking.html">USN Tracking</a>
+                <a class="menu-item" href="fa.html">FA Process</a>
+                <a class="menu-item" href="rework.html">Rework</a>
+                <a class="menu-item" href="warehouse.html">Warehouse</a>
+                <a class="menu-item active" href="vi.html">VI Process</a>
+                <a class="menu-item" href="sma.html">SMA</a>
+                <a class="menu-item" href="testing.html">Testing</a>
+                <a class="menu-item" href="chart.html">Chart</a>
+            </nav>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <div>
+                    <h1>VI Stage</h1>
+                    <p class="sub">Only VI stage units</p>
+                </div>
+                <div class="top-actions">
+                    <button id="themeToggle" class="theme-btn">🌙 Dark</button>
+                </div>
+            </header>
+
+            <section class="panel table-panel">
+                <div class="panel-header">
+                    <h3>Warehouse Units</h3>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>USN</th>
+                            <th>ID</th>
+                            <th>Model</th>
+                            <th>Current Stage</th>
+                            <th>Status</th>
+                            <th>Operator</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stageTableBody"></tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>

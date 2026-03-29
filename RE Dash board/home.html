@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Home</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="home">
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="brand">Tracking Dashboard</div>
+            <nav class="menu">
+                <a class="menu-item active" href="home.html">Dashboard</a>
+                <a class="menu-item" href="tracking.html">USN Tracking</a>
+                <a class="menu-item" href="fa.html">FA Process</a>
+                <a class="menu-item" href="rework.html">Rework</a>
+                <a class="menu-item" href="warehouse.html">Warehouse</a>
+                <a class="menu-item" href="vi.html">VI Process</a>
+                <a class="menu-item" href="sma.html">SMA</a>
+                <a class="menu-item" href="testing.html">Testing</a>
+            </nav>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <div>
+                    <h1>Dashboard Overview</h1>
+                    <p class="sub">Automatic summary from CSV</p>
+                </div>
+                <div class="top-actions">
+                    <button id="themeToggle" class="theme-btn">🌙 Dark</button>
+                </div>
+            </header>
+
+            <section class="cards-grid">
+                <div class="card">
+                    <h3>Total Units</h3>
+                    <p id="totalUnits">0</p>
+                </div>
+                <div class="card">
+                    <h3>Completed</h3>
+                    <p id="completedUnits">0</p>
+                </div>
+                <div class="card">
+                    <h3>In Progress</h3>
+                    <p id="progressUnits">0</p>
+                </div>
+                <div class="card">
+                    <h3>Pending</h3>
+                    <p id="pendingUnits">0</p>
+                </div>
+            </section>
+
+            <section class="panel table-panel">
+                <div class="panel-header">
+                    <h3>Latest Units</h3>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>USN</th>
+                            <th>ID</th>
+                            <th>Model</th>
+                            <th>Current Stage</th>
+                            <th>Status</th>
+                            <th>Operator</th>
+                        </tr>
+                    </thead>
+                    <tbody id="homeTableBody"></tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+    <div class="panel">
+        <h3>Stage Summary</h3>
+        <canvas id="barChart" style="max-width:500px;height:250px;"></canvas>
+    </div>
+
+    <div class="panel">
+        <h3>Stage Distribution</h3>
+        <canvas id="pieChart" style="max-width:400px;height:250px;"></canvas>
+    </div>
+
+    <div class="panel">
+        <h3>USN Details</h3>
+        <div id="usnDetails"></div>
+    </div>
+    <div class="panel">
+        <h3>Stage Summary</h3>
+        <canvas id="barChart" style="max-width:500px;height:250px;"></canvas>
+    </div>
+
+    <div class="panel">
+        <h3>Stage Distribution</h3>
+        <canvas id="pieChart" style="max-width:400px;height:250px;"></canvas>
+    </div>
+
+    <div class="panel">
+        <h3>USN Details</h3>
+        <div id="usnDetails"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/script.js"></script>
+
+</body>
+</html>
