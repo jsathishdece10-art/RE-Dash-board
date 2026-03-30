@@ -37,7 +37,6 @@
     <None Include="data\usn_tracking.csv" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="chart.html" />
     <Content Include="rework.html" />
     <Content Include="sma.html" />
     <Content Include="testing.html" />
