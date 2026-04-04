@@ -35,7 +35,7 @@ function parseCSV(text) {
     return lines.slice(1).map(line => {
         const values = line.split(",");
         let obj = {};
-        headers.forEach((h, i) => obj[h.trim()] = (values[i] || "").trim());
+        headers.forEach((h, i) => obj[h.trim().toLowerCase()] = (values[i] || "").trim());
         return obj;
     });
 }
@@ -45,23 +45,25 @@ function groupCSVData(rows) {
     const grouped = {};
 
     rows.forEach(row => {
-        const usn = row.USN;
-        if (!usn) return;
-
+        const usn = row.usn
+        if (!usn) {
+            console.warn("MISSING USN:", row);
+            return;
+        }
         if (!grouped[usn]) {
             grouped[usn] = {
-                usn,
-                id: row.ID,
-                model: row.Model,
-                stage: row["current stage"],
-                status: row["status"],
-                inTime: row["in Time"],
-                outTime: row["out Time"],
-                operator: row["operator"],
-                result: row.Result,
-                remarks: row.Remarks,
-                history: []
-            };
+usn: row.usn,
+id: row.id,
+model: row.model,
+stage: (row["current stage"] || "").trim(),
+status: row.status,
+inTime: row["in time"],
+outTime: row["out time"],
+operator: row.operator,
+result: row.result,
+remarks: row.remarks,
+history: []
+};
         }
 
         grouped[usn].history.push({
@@ -102,26 +104,26 @@ function renderTrackingTable(data) {
 
     if (pageStage) {
         filteredData = filteredData.filter(x =>
-            (x["current stage"] || "").toLowerCase().includes(pageStage)
+            (x.stage || "").toLowerCase().includes(pageStage)
         );
     }
 
     // Status filter
     if (filter === "completed") {
         filteredData = filteredData.filter(x =>
-            (x["status"] || "").toLowerCase().includes("completed") ||
-            (x["Result"] || "").toLowerCase().includes("pass")
+            (x["Status"] || "").toLowerCase().includes("completed") ||
+            (x["result"] || "").toLowerCase().includes("pass")
         );
     }
     else if (filter === "progress") {
         filteredData = filteredData.filter(x =>
-            (x["status"] || "").toLowerCase().includes("progress")
+            (x["Status"] || "").toLowerCase().includes("progress")
         );
     }
     else if (filter === "pending") {
         filteredData = filteredData.filter(x =>
-            (x["status"] || "").toLowerCase().includes("pending") ||
-            (x["status"] || "").toLowerCase().includes("hold")
+            (x["Status"] || "").toLowerCase().includes("pending") ||
+            (x["Status"] || "").toLowerCase().includes("hold")
         );
     }
     else if (filter === "fg") {
@@ -134,6 +136,10 @@ function renderTrackingTable(data) {
             (x["result"] || "").toLowerCase().includes("scrap")
         );
     }
+    function getTrackingBody() {
+        return document.getElementById("trackingBody");
+    }
+    if (!trackingBody) return;
     trackingBody.innerHTML = "";
     const groupedData = {};
 
@@ -145,13 +151,13 @@ function renderTrackingTable(data) {
                 usn: row.usn,
                 id: row.id,
                 model: row.model,
-                stage: row["current stage"], // latest stage
+                stage: row["current stage"], // ✅ correct
                 status: row["status"],
                 inTime: row["in Time"],
                 outTime: row["out Time"],
-                operator: row["operator"],
-                result: row["Result"],
-                remarks: row["remarks"],
+                operator: row["Operator"], // ✅ OK (if CSV same)
+                result: row["result"], // ✅ correct
+                remarks: row["remarks"], // 🔥 FIX (capital R)
                 history: []
             };
         }
@@ -248,21 +254,29 @@ ${item.history.map(function (h) {
             completedEl.textContent = completed;
             progressEl.textContent = progress;
             pendingEl.textContent = pending;
-            const body = document.getElementById("homeTableBody");
+            const body =
+                document.getElementById("homeTableBody") ||
+                document.getElementById("trackingBody") ||
+                document.getElementById("stageTableBody");
             if (!body) return;
 
             body.innerHTML = "";
-            usnData.slice(0, 5).forEach(item => {
+            usnData
+                .filter(item =>
+                    (item.stage || "").toLowerCase().includes("fa")
+                )
+                .forEach(item => {
                 const row = `
 <tr>
 <td>${item.usn || ""}</td>
 <td>${item.id || ""}</td>
 <td>${item.model || ""}</td>
-<td>${item["current stage"] || ""}</td>
+<td>${item.stage || ""}</td>
 <td>${item["status"] || ""}</td>
-<td>${item["Operator"] || ""}</td>
+<td>${item["operator"] || ""}</td>
 </tr>
 `;
+                 
                 body.innerHTML += row;
             });
             // TOTAL CLICK
@@ -352,15 +366,36 @@ ${item.history.map(function (h) {
                 }
             });
         }
-        const pageType = window.location.pathname.includes("home") ? "home" : "tracking";
+const path = window.location.pathname.toLowerCase();
+
+let pageType = "tracking";
+
+if (path.includes("home")) pageType = "home";
+else if (path.includes("fa")) pageType = "fa";
+else if (path.includes("rework")) pageType = "rework";
+else if (path.includes("warehouse")) pageType = "warehouse";
+else if (path.includes("vi")) pageType = "vi";
+else if (path.includes("sma")) pageType = "sma";
+else if (path.includes("testing")) pageType = "testing";
         // ROUTER
-        function initPage() {
-            if (pageType === "tracking") {
-                renderTrackingTable(usnData);
-            } else if (pageType === "home") {
-                renderHomeDashboard();
-            }
-        }
+function initPage() {
+    if (pageType === "tracking") {
+        renderTrackingTable(usnData);
+    }
+    else if (pageType === "home") {
+        renderHomeDashboard();
+    }
+    else if (pageType === "fa") {
+        renderTrackingTable(
+            usnData.filter(x =>
+                (x.stage || "").toLowerCase().includes("fa")
+            )
+        );
+    }
+    else {
+        renderTrackingTable(usnData);
+    }
+}
 
         // START
         document.addEventListener("DOMContentLoaded", loadCSVData);
