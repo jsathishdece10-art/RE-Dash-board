@@ -53,11 +53,11 @@ function groupCSVData(rows) {
                 usn,
                 id: row.ID,
                 model: row.Model,
-                stage: row["Current Stage"],
-                status: row.Status,
-                inTime: row["In Time"],
-                outTime: row["Out Time"],
-                operator: row.Operator,
+                stage: row["current stage"],
+                status: row["status"],
+                inTime: row["in Time"],
+                outTime: row["out Time"],
+                operator: row["operator"],
                 result: row.Result,
                 remarks: row.Remarks,
                 history: []
@@ -65,13 +65,19 @@ function groupCSVData(rows) {
         }
 
         grouped[usn].history.push({
-            stage: row["History Stage"],
+            stage: row["History stage"],
             time: row["History Time"],
-            status: row["History Status"]
+            status: row["History status"]
         });
     });
 
     return Object.values(grouped);
+}
+let statusFilter = "all";
+
+function setStatusFilter(type) {
+    statusFilter = type;
+    renderTrackingTable(usnData);
 }
 
 // LOAD CSV
@@ -84,30 +90,48 @@ async function loadCSVData() {
 
     initPage();
     renderCharts();
-    renderTrackingTable(usnData)
-}
+  }
 
 // TABLE
 function renderTrackingTable(data) {
-    console.log("FILTER:", getFilter());
-    if (!trackingBody) return;
-    const filter = getFilter();
+    const filter = statusFilter;
     let filteredData = data;
+
+    // Stage filter
+    const pageStage = document.body.dataset.stage;
+
+    if (pageStage) {
+        filteredData = filteredData.filter(x =>
+            (x["current stage"] || "").toLowerCase().includes(pageStage)
+        );
+    }
+
+    // Status filter
     if (filter === "completed") {
-        filteredData = data.filter(x =>
-            (x.status || "").toLowerCase().includes("completed") ||
-            (x.result || "").toLowerCase().includes("pass")
+        filteredData = filteredData.filter(x =>
+            (x["status"] || "").toLowerCase().includes("completed") ||
+            (x["Result"] || "").toLowerCase().includes("pass")
         );
     }
     else if (filter === "progress") {
-        filteredData = data.filter(x =>
-            (x.status || "").toLowerCase().includes("progress")
+        filteredData = filteredData.filter(x =>
+            (x["status"] || "").toLowerCase().includes("progress")
         );
     }
     else if (filter === "pending") {
-        filteredData = data.filter(x =>
-            (x.status || "").toLowerCase().includes("pending") ||
-            (x.status || "").toLowerCase().includes("hold")
+        filteredData = filteredData.filter(x =>
+            (x["status"] || "").toLowerCase().includes("pending") ||
+            (x["status"] || "").toLowerCase().includes("hold")
+        );
+    }
+    else if (filter === "fg") {
+        filteredData = filteredData.filter(x =>
+            (x["result"] || "").toLowerCase().includes("fg")
+        );
+    }
+    else if (filter === "scrap") {
+        filteredData = filteredData.filter(x =>
+            (x["result"] || "").toLowerCase().includes("scrap")
         );
     }
     trackingBody.innerHTML = "";
@@ -121,30 +145,30 @@ function renderTrackingTable(data) {
                 usn: row.usn,
                 id: row.id,
                 model: row.model,
-                stage: row.stage, // latest stage
-                status: row.status,
-                inTime: row.inTime,
-                outTime: row.outTime,
-                operator: row.operator,
-                result: row.result,
-                remarks: row.remarks,
+                stage: row["current stage"], // latest stage
+                status: row["status"],
+                inTime: row["in Time"],
+                outTime: row["out Time"],
+                operator: row["operator"],
+                result: row["Result"],
+                remarks: row["remarks"],
                 history: []
             };
         }
 
         // Add every row to history
         groupedData[row.usn].history.push({
-            stage: row.stage,
-            time: row.inTime,
-            status: row.status
+            stage: row["current stage"] || "",
+            time: row["in Time"] || "",
+            status: row["status"] || ""
         });
 
         // Always update latest stage (last row wins)
-        groupedData[row.usn].stage = row.stage;
-        groupedData[row.usn].status = row.status;
-        groupedData[row.usn].inTime = row.inTime;
-        groupedData[row.usn].outTime = row.outTime;
-    });
+        groupedData[row.usn].stage = row["current stage"];
+        groupedData[row.usn].status = row["status"];
+        groupedData[row.usn].inTime = row["inTime"];
+        groupedData[row.usn].outTime = row["outTime"];
+        groupedData[row.usn].operator = row["operator"];    });
     const finalData = Object.values(groupedData).filter((item, i) => {
         if (filter === "all") return true;
         if (filter === "progress") return item.status.toLowerCase().includes("progress");
@@ -234,9 +258,9 @@ ${item.history.map(function (h) {
 <td>${item.usn || ""}</td>
 <td>${item.id || ""}</td>
 <td>${item.model || ""}</td>
-<td>${item.currentStage || ""}</td>
-<td>${item.status || ""}</td>
-<td>${item.operator || ""}</td>
+<td>${item["current stage"] || ""}</td>
+<td>${item["status"] || ""}</td>
+<td>${item["Operator"] || ""}</td>
 </tr>
 `;
                 body.innerHTML += row;

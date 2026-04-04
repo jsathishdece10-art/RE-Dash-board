@@ -1,19 +1,19 @@
-USN,ID,Model,Current Stage,Status,In Time,Out Time,Operator,Result,Remarks,History Stage,History Time,History Status
-HY000000123,218421,635-167,FA Process,In Progress,9:30 AM,--,Arun,Pending,Pre-Debond,FA IN,9:30 AM,Started
-HY000000124,218421,635-167,FA Process,In Progress,9:30 AM,--,Arun,Pending,Pre-Debond,FA OUT,10:00 AM,Completed
-HY000000125,218421,635-167,FA Process,In Progress,9:30 AM,--,Arun,Pending,Pre-Debond,Rework IN,10:20 AM,Started
-HY000000126,22222,635-167,FA Process,In Progress,9:30 AM,--,Arun,Pending,Pre-Debond,Testing IN,12:00 PM,Pending
+USN,ID,Model,current stage,status,in Time,out Time,operator,Result,Remarks,History Stage,History Time,History Status
+HY000000123,218421,635-167,FA Process,Pending,9:30 AM,Arun,Pending,Pre-Debond,FA IN,9:30 AM,Started
+HY000000124,218421,635-167,FA Process,Pending,9:30 AM,Arun,Pending,Pre-Debond,FA OUT,10:00 AM,Completed
+HY000000125,218421,635-167,FA Process,Pending,9:30 AM,Arun,Pending,Pre-Debond,Rework IN,10:20 AM,Started
+HY000000126,22222,635-167,FA Process,Pending,9:30 AM,Arun,Pending,Pre-Debond,Testing IN,12:00 PM,Pending
 HY000000127,22222,085-123,Testing,Completed,10:15 AM,11:40 AM,Priya,Pass,CRB Cleared,Warehouse IN,8:45 AM,Started
 HY000000128,22222,085-123,Testing,Completed,10:15 AM,11:40 AM,Priya,Pass,CRB Cleared,Testing OUT,11:40 AM,Completed
 HY000000129,33333,085-123,Testing,Completed,10:15 AM,11:40 AM,Priya,Pass,Pre-Debond,FA IN,9:30 AM,Started
-HY000000130,33333,635-167,WAREHOUSE,Completed,10:15 AM,11:40 AM,ATHISH',Pass,Pre-Debond,FA OUT,10:00 AM,Completed
-HY000000131,33333,635-167,VI,Completed,10:15 AM,11:40 AM,SATHISH',Pass,Pre-Debond,Rework IN,10:20 AM,Started
-HY000000132,33333,635-167,SNA,Completed,10:15 AM,11:40 AM,SATHISH',Pass,Pre-Debond,Testing IN,12:00 PM,Pending
-HY000000133,33333,635-167,REWORK,Completed,10:15 AM,11:40 AM,SATHISH',Pass,CRB Cleared,Warehouse IN,8:45 AM,Started
+HY000000130,33333,635-167,WAREHOUSE,Scrap,10:15 AM,11:40 AM,ATHISH',Pass,Pre-Debond,FA OUT,10:00 AM,Completed
+HY000000131,33333,635-167,VI,Scrap,10:15 AM,11:40 AM,SATHISH',Pass,Pre-Debond,Rework IN,10:20 AM,Started
+HY000000132,33333,635-167,SNA,Scrap,10:15 AM,11:40 AM,SATHISH',Pass,Pre-Debond,Testing IN,12:00 PM,Pending
+HY000000133,33333,635-167,REWORK,Scrap,10:15 AM,11:40 AM,SATHISH',Pass,CRB Cleared,Warehouse IN,8:45 AM,Started
 HY000000134,44444,085-123,Testing,Completed,10:15 AM,11:40 AM,SATHISH',Pass,CRB Cleared,Testing OUT,11:40 AM,Completed
-HY000000135,44444,085-123,Testing,Completed,10:15 AM,11:40 AM,SATHISH',Pass,Pre-Debond,FA IN,9:30 AM,Started
-HY000000136,44444,085-123,Testing,Completed,10:15 AM,11:40 AM,SATHISH',Pass,Pre-Debond,FA OUT,10:00 AM,Completed
-HY000000137,44444,085-123,FA Process,Completed,10:15 AM,11:40 AM,SATHISH',Pass,Pre-Debond,Rework IN,10:20 AM,Started
-HY000000138,44444,085-123,FA Process,Completed,10:15 AM,11:40 AM,SATHISH',Pass,Pre-Debond,Testing IN,12:00 PM,Pending
-HY000000139,55555,635-167,FA Process,Completed,10:15 AM,11:40 AM,SATHISH',Pass,CRB Cleared,Warehouse IN,8:45 AM,Started
-HY000000140,55555,635-167,Testing,Completed,10:15 AM,11:40 AM,SATHISH',Pass,CRB Cleared,Testing OUT,11:40 AM,Completed
+HY000000135,44444,085-123,Testing,FG,10:15 AM,11:40 AM,SATHISH',Pass,Pre-Debond,FA IN,9:30 AM,Started
+HY000000136,44444,085-123,Testing,FG,10:15 AM,11:40 AM,SATHISH',Pass,Pre-Debond,FA OUT,10:00 AM,Completed
+HY000000137,44444,085-123,FA Process,FG,10:15 AM,11:40 AM,SATHISH',Pass,Pre-Debond,Rework IN,10:20 AM,Started
+HY000000138,44444,085-123,FA Process,FG,10:15 AM,11:40 AM,SATHISH',Pass,Pre-Debond,Testing IN,12:00 PM,Pending
+HY000000139,55555,635-167,FA Process,FG,10:15 AM,11:40 AM,SATHISH',Pass,CRB Cleared,Warehouse IN,8:45 AM,Started
+HY000000140,55555,635-167,Testing,FG,10:15 AM,11:40 AM,SATHISH',Pass,CRB Cleared,Testing OUT,11:40 AM,Completed
