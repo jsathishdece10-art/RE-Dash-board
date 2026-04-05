@@ -36,21 +36,30 @@
             </header>
 
             <section class="cards-grid">
-                <div class="card">
+                <div class="card" onclick="goToTracking('all')" style="cursor:pointer;">
                     <h3>Total Units</h3>
                     <p id="totalUnits">0</p>
                 </div>
-                <div class="card">
+
+                <div class="card" onclick="goToTracking('completed')" style="cursor:pointer;">
                     <h3>Completed</h3>
                     <p id="completedUnits">0</p>
                 </div>
-                <div class="card">
-                    <h3>In Progress</h3>
-                    <p id="progressUnits">0</p>
-                </div>
-                <div class="card">
+
+              
+                <div class="card" onclick="goToTracking('pending')" style="cursor:pointer;">
                     <h3>Pending</h3>
                     <p id="pendingUnits">0</p>
+                </div>
+
+                <div class="card" onclick="goToTracking('fg')" style="cursor:pointer;">
+                    <h3>FG</h3>
+                    <p id="fgUnits">0</p>
+                </div>
+
+                <div class="card" onclick="goToTracking('scrap')" style="cursor:pointer;">
+                    <h3>Scrap</h3>
+                    <p id="scrapUnits">0</p>
                 </div>
             </section>
 

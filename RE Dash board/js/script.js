@@ -75,10 +75,32 @@ async function loadCSVData() {
 
     const raw = parseCSV(text);
     usnData = groupCSVData(raw);
+    // get dashboard filter
+    const dashFilter = localStorage.getItem("dashboardFilter");
+
+    if (dashFilter) {
+        currentFilter = dashFilter;
+
+        const dropdown = document.getElementById("statusFilter");
+        if (dropdown) {
+            dropdown.value = dashFilter;
+        }
+
+       
+        setTimeout(() => {
+            applyFilter();
+            localStorage.removeItem("dashboardFilter");
+
+        },
+            100);
+    }
 
     initPage();
 }
-
+function goToTracking(filter) {
+    localStorage.setItem("dashboardFilter", filter);
+    window.location.href = "tracking.html";
+}
 // =======================
 // STATUS STYLE
 // =======================
@@ -150,14 +172,31 @@ window.toggleHistory = toggleHistory;
 // =======================
 function renderHomeDashboard() {
     const total = usnData.length;
-    const completed = usnData.filter(x => x.status.toLowerCase().includes("completed")).length;
-    const pending = usnData.filter(x => x.status.toLowerCase().includes("pending")).length;
-    const progress = total - completed - pending;
+
+    const completed = usnData.filter(x =>
+        (x.status || "").toLowerCase().includes("completed")
+    ).length;
+
+    const pending = usnData.filter(x =>
+        (x.status || "").toLowerCase().includes("pending")
+    ).length;
+
+    
+    const fg = usnData.filter(x =>
+        (x.status || "").toLowerCase().trim() === "fg"
+    ).length;
+
+    const scrap = usnData.filter(x =>
+        (x.status || "").toLowerCase().trim() === "scrap"
+    ).length;
 
     document.getElementById("totalUnits").innerText = total;
     document.getElementById("completedUnits").innerText = completed;
     document.getElementById("pendingUnits").innerText = pending;
-    document.getElementById("progressUnits").innerText = progress;
+    
+    // 🔥 NEW
+    document.getElementById("fgUnits").innerText = fg;
+    document.getElementById("scrapUnits").innerText = scrap;
 
     // 🔥 LATEST 5 UNITS (IMPORTANT)
     const latest = [...usnData].reverse().slice(0, 5);
@@ -187,17 +226,28 @@ function initPage() {
     const path = window.location.pathname.toLowerCase();
 
     if (path.includes("tracking")) {
-        renderTrackingTable(usnData);
+
+        let filtered = usnData;
+
+        if (currentFilter !== "all") {
+            filtered = usnData.filter(item =>
+                (item.status || "").toLowerCase().includes(currentFilter.toLowerCase())
+            );
+        }
+
+        renderTrackingTable(filtered);
+    
     }
     else if (path.includes("fa")) {
         const faData = usnData.filter(x =>
             (x.stage || "").toLowerCase().includes("fa")
         );
+
         let filtered = faData;
 
         if (currentFilter !== "all") {
             filtered = faData.filter(item =>
-                (item.status || "").toLowerCase().includes(currentFilter)
+                (item.status || "").toLowerCase().includes(currentFilter.toLowerCase())
             );
         }
 
@@ -328,7 +378,63 @@ function applyFilter() {
 currentFilter = document.getElementById("statusFilter").value;
 initPage(); // reload current page
 }
+function goHome() {
+    window.location.href = "home.html";
+}
 // =======================
 // START
 // =======================
 document.addEventListener("DOMContentLoaded", loadCSVData);
+// SEARCH ONLY (SAFE - NO IMPACT)
+document.addEventListener("DOMContentLoaded", () => {
+    const search = document.getElementById("searchInput");
+
+    if (!search) return;
+
+    search.addEventListener("input", function () {
+        const value = this.value.toLowerCase();
+        isSearching = value !== "";
+
+        const rows = document.querySelectorAll("tbody tr");
+
+        // 🔴 when search empty
+        if (value === "") {
+            rows.forEach(row => {
+                row.style.display = "";
+            });
+
+            // close expanded rows
+            rows.forEach(row => {
+                if (row.innerText.includes("|")) {
+                    row.style.display = "none";
+                }
+            });
+
+            return;
+        }
+
+        // 🔍 search working
+        rows.forEach((row, index) => {
+            const cells = row.querySelectorAll("td");
+
+            let text = "";
+
+            cells.forEach(td => {
+                text += td.innerText.toLowerCase() + " ";
+            });
+
+
+            // force close expanded row (next row)
+            const nextRow = row.nextElementSibling;
+            if (nextRow && nextRow.innerText.includes("|")) {
+                nextRow.style.display = "none";
+            }
+
+            if (text.includes(value)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    });
+});
