@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>USN Full Tracking</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="tracking">
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="brand">Tracking Dashboard</div>
+            <nav class="menu">
+                <a class="menu-item" href="home.html">Dashboard</a>
+                <a class="menu-item active" href="tracking.html">USN Tracking</a>
+                <a class="menu-item" href="fa.html">FA Process</a>
+                <a class="menu-item" href="rework.html">Rework</a>
+                <a class="menu-item" href="warehouse.html">Warehouse</a>
+                <a class="menu-item" href="vi.html">VI Process</a>
+                <a class="menu-item" href="sma.html">SMA</a>
+                <a class="menu-item" href="testing.html">Testing</a>
+                <a class="menu-item" href="chart.html">Chart</a>
+            </nav>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <button onclick="goHome()" class="back-btn">⬅ Back</button>
+                <div>
+                    <h1>USN Full Tracking</h1>
+                    <p class="sub">Automatic live data from CSV</p>
+                </div>
+
+                <div class="top-actions">
+                    <input type="text" id="searchInput" class="search-box" placeholder="Search USN / ID / Stage..." />
+                    <button id="themeToggle" class="theme-btn">🌙 Dark</button>
+                </div>
+            </header>
+
+            <section class="panel">
+                <div class="panel-header">
+                    <h3>Live Data Source</h3>
+                    <p id="excelStatus" class="excel-status">Reading data/usn_tracking.csv...</p>
+                </div>
+            </section>
+
+            <section class="panel table-panel">
+                <div class="panel-header">
+                    <h3>Master Tracking Table</h3>
+                </div>
+
+                <table id="trackingTable">
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>USN</th>
+                            <th>ID</th>
+                            <th>Model</th>
+                            <th>Current Stage</th>
+                            <th>status</th>
+                            <th>in Time</th>
+                            <th>out Time</th>
+                            <th>Operator</th>
+                            <th>Result</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody id="trackingBody"></tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
