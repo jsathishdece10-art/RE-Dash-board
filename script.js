@@ -70,7 +70,7 @@ function groupCSVData(rows) {
 // LOAD CSV
 // =======================
 async function loadCSVData() {
-    const res = await fetch("data/usn_tracking.csv?v=" + Date.now());
+    const res = await fetch("usn_tracking.csv?v=" + Date.now());
     const text = await res.text();
 
     const raw = parseCSV(text);
